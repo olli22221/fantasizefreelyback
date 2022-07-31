@@ -1,0 +1,6 @@
+music21
+midi2audio
+jwt
+Flask
+Flask-Cors
+dotenv
