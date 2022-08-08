@@ -2,6 +2,7 @@ import base64
 import os, jwt
 import sqlite3, uuid, datetime, json
 import time
+from runMelodyRNN import runRnn
 from runMusicat import run, convertMidiToMusicat
 from flask import Flask, request,Response, jsonify
 from flask_cors import CORS
@@ -69,6 +70,15 @@ def sendBlob():
     return Response(request.form['wavFile'] ,status=200)
 
 
+
+@app.route('/runRNN', methods=['POST'])
+def runRNN():
+    if request.method == 'POST':
+        data = request.json['data']
+        UserPath = "rnnModel/generatedMelodies"
+        response = runRnn(data, UserPath)
+        print(response)
+        return Response(response, status=200)
 @app.route('/runMusicat', methods=['POST'])
 def runMusicat():
     if request.method == 'POST':
@@ -94,4 +104,4 @@ def runMusicat():
         meter = request.json['meter']
         response = run(os.getcwd()+"/RhythmCat.exe", data)
         print(response)
-        return Response(response, status=200)
+        return Response(response,status=200)

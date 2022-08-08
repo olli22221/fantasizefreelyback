@@ -10,6 +10,25 @@ dotsDict = {0:"", 1:"."}
 musicatDurationDict = {"w":"W", "h":"H", "q":"Q", "8d":"E", "16":"S"}
 musicatPitchDict = {"c":"C","d":"D","e":"E","f":"F","g":"G","a":"A","b":"B"}
 musicatAccent = {0:"",1:"#",2:"b"}
+midiSharps = ["A#","B#","C#","D#","E#","F#","G#"]
+midiB = ["A-","B-","C-","D-","E-","F-","G-"]
+midiToComposition = {"A":"a","B":"b","C":"c","D":"d","E":"e","F":"f","G":"g","rest":"r"}
+midiToDuration = {"16th":"16","eighth":"8d","quarter":"q","half":"h","whole":"w"}
+
+compToMidi = {"g/3":55,"a/3":57,"b/3":59,"c/4":60,"d/4":62,"e/4":64,"f/4":65,"g/4":67,"a/4":69,"b/4":71,"c/5":72
+              ,"d/5":74,"e/5":76,"f/5":77,"g/5":79,"a/5":81,"b/5":83,"c/6":84}
+
+
+def calculateMidiPitch(note, accented):
+    if accented == 1:
+        return compToMidi[note]+1
+
+    if accented == -1:
+        return compToMidi[note]-1
+
+    if accented == 0:
+        return compToMidi[note]
+
 
 def convertToMusicat(composition):
     measureCount = 0
@@ -34,6 +53,58 @@ def convertToMusicat(composition):
 
     print(musicatString)
     return musicatString
+
+restDuration = {"16":"16r","8d":"8r","q":"qr","h":"hr","w":"wr"}
+def convertMidiToScore(file, numberOfMeasures):
+    mf = midi.MidiFile()
+    mf.open("rnnModel/generatedMelodies/"+file)
+    mf.read()
+
+    s = midi.translate.midiFileToStream(mf)
+
+    mf.close()
+    resultNotes = []
+    resultDuration = []
+    resultAccent = []
+    noteToAdd = ""
+    for thisnote in s.recurse().notesAndRests:
+        if thisnote.duration.type == 'complex':
+            return None, None, None
+        m21noteDuration = midiToDuration[thisnote.duration.type]
+        m21noteName = thisnote.name
+
+
+        if thisnote.measureNumber < numberOfMeasures+1:
+            continue
+        else:
+            if m21noteName == "rest":
+
+                dur = restDuration[m21noteDuration]
+                resultDuration.append(dur)
+                resultNotes.append("b/4")
+                resultAccent.append(0)
+                continue
+            m21noteOctave = thisnote.octave
+            if m21noteName in midiSharps:
+                noteToAdd += midiToComposition[m21noteName[0]]
+                noteToAdd += "/"
+                resultAccent.append(1)
+            elif m21noteName in midiB:
+                noteToAdd += midiToComposition[m21noteName[0]]
+                noteToAdd += "/"
+                resultAccent.append(-1)
+            else:
+                noteToAdd += midiToComposition[m21noteName]
+                noteToAdd += "/"
+                resultAccent.append(0)
+
+            noteToAdd += str(m21noteOctave)
+            resultNotes.append(noteToAdd)
+            noteToAdd = ""
+            resultDuration.append(m21noteDuration)
+    return  resultDuration, resultNotes,resultAccent
+
+
 
 
 
@@ -95,8 +166,31 @@ def convertMidiToWav(pathToMidi,outputPath):
     FluidSynth().midi_to_audio(pathToMidi,outputPath)
 
 
-def convertCompositionToMidi():
-    pass
+durationToNoteOff = {"w":[-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2],"h":[-2,-2,-2,-2,-2,-2,-2],"q":[-2,-2,-2],"8d":[-2],"16":[]}
+def calculateDurationSymbols(duration):
+
+    return durationToNoteOff[duration]
+
+
+def convertCompositionToRnn(composition):
+
+    rnnArray = []
+    for arr in composition:
+
+        for elem in arr:
+            duration = elem['duration']
+            accent = elem['accented']
+            pitchType = elem['type']
+
+            midiPitch = calculateMidiPitch(pitchType[0],accent)
+            noteOffEvents = calculateDurationSymbols(duration)
+
+            rnnArray.append(midiPitch)
+            for i in noteOffEvents:
+                rnnArray.append(i)
+    return rnnArray
+
+
 
 
 
