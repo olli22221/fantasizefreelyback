@@ -7,6 +7,7 @@ from runMusicat import run, convertMidiToMusicat
 from flask import Flask, request,Response, jsonify
 from flask_cors import CORS
 from dotenv import load_dotenv
+from runCreativityScoring import calculateCreativityScores
 import wave
 load_dotenv()
 app = Flask(__name__)
@@ -63,9 +64,12 @@ def sendBlob():
     base64_string = request.form['wavFile']
     base64_stringarr = base64_string.split(",")
     base64_string = base64_stringarr[1]
-    cmd =  'echo '+ base64_string + '| base64 --decode' + ' > temp2.wav'
-    os.system(cmd)
+    cmd =  'echo '+ base64_string + '| base64 --decode' + ' > ~/backend/temp2.wav'
+    try:
+        os.system(cmd)
 
+    except:
+        print("cmd not working")
 
     return Response(request.form['wavFile'] ,status=200)
 
@@ -105,3 +109,35 @@ def runMusicat():
         response = run(os.getcwd()+"/RhythmCat.exe", data)
         print(response)
         return Response(response,status=200)
+
+
+
+
+
+@app.route('/calculateCreativity', methods=['POST'])
+def runCreativityScoring():
+    if request.method == 'POST':
+        '''#conn = get_db_connection()
+
+        #jwtToken = request.form['jwtToken']
+        #count = request.form['count']
+        #try:
+           # decodedToken = jwt.decode(jwtToken, SECRET_KEY, algorithms=["HS256"])
+        except:
+            return "JWT Token expired", 401
+        subjectId = decodedToken['id']
+        composition_uuid = str(uuid.uuid4())
+        '''
+        # composition = request.form['composition']
+
+        # result = run(os.getcwd()+"/RhythmCat.exe", composition)
+        # conn.execute("INSERT INTO compositions (id,fk,filepath) VALUES( ?,?,?)", (composition_uuid, subjectId, midfilepath))
+        # conn.commit()
+        # conn.close()
+        data = request.json['data']
+        flex, orig = calculateCreativityScores(data)
+
+
+        response = calculateCreativityScores(data)
+        print(response)
+        return Response(response, status=200)

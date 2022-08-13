@@ -23,7 +23,7 @@ def calculateMidiPitch(note, accented):
     if accented == 1:
         return compToMidi[note]+1
 
-    if accented == -1:
+    if accented == 2:
         return compToMidi[note]-1
 
     if accented == 0:
@@ -92,7 +92,7 @@ def convertMidiToScore(file, numberOfMeasures):
             elif m21noteName in midiB:
                 noteToAdd += midiToComposition[m21noteName[0]]
                 noteToAdd += "/"
-                resultAccent.append(-1)
+                resultAccent.append(2)
             else:
                 noteToAdd += midiToComposition[m21noteName]
                 noteToAdd += "/"
