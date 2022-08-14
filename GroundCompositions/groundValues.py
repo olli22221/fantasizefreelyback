@@ -27,5 +27,239 @@ groundCompositions = [
     {'type': ['b/5'], 'duration': '8d', 'accented': 0}, {'type': ['e/4'], 'duration': '8d', 'accented': 0},
     {'type': ['d/4'], 'duration': '8d', 'accented': 0}, {'type': ['a/4'], 'duration': 'w', 'accented': 0}]]
 
+    # Twinkle Twinkle Variation A
+
+    , [[{'type': ['c/5'], 'duration': '16', 'accented': 0}, {'type': ['c/5'], 'duration': '16', 'accented': 0},{'type': ['c/5'], 'duration': '16', 'accented': 0},
+    {'type': ['c/5'], 'duration': '16', 'accented': 0},{'type': ['c/5'], 'duration': '8d', 'accented': 0},{'type': ['c/5'], 'duration': '8d', 'accented': 0},
+    {'type': ['g/5'], 'duration': '16', 'accented': 0},{'type': ['g/5'], 'duration': '16', 'accented': 0},{'type': ['g/5'], 'duration': '16', 'accented': 0},
+     {'type': ['g/5'], 'duration': '16', 'accented': 0}, {'type': ['g/5'], 'duration': '8d', 'accented': 0},{'type': ['g/5'], 'duration': '8d', 'accented': 0}],
+   [{'type': ['a/5'], 'duration': '16', 'accented': 0}, {'type': ['a/5'], 'duration': '16', 'accented': 0},{'type': ['a/5'], 'duration': '16', 'accented': 0},
+    {'type': ['a/5'], 'duration': '16', 'accented': 0},{'type': ['a/5'], 'duration': '8d', 'accented': 0},{'type': ['a/5'], 'duration': '8d', 'accented': 0},
+    {'type': ['g/5'], 'duration': '16', 'accented': 0}, {'type': ['g/5'], 'duration': '16', 'accented': 0},
+    {'type': ['g/5'], 'duration': '16', 'accented': 0},{'type': ['g/5'], 'duration': '16', 'accented': 0}, {'type': ['g/5'], 'duration': '8d', 'accented': 0},
+    {'type': ['g/5'], 'duration': '8d', 'accented': 0},
+    ],
+   [{'type': ['f/5'], 'duration': '16', 'accented': 0}, {'type': ['f/5'], 'duration': '16', 'accented': 0},{'type': ['f/5'], 'duration': '16', 'accented': 0},
+    {'type': ['f/5'], 'duration': '16', 'accented': 0},{'type': ['f/5'], 'duration': '8d', 'accented': 0},{'type': ['f/5'], 'duration': '8d', 'accented': 0},
+    {'type': ['e/5'], 'duration': '16', 'accented': 0}, {'type': ['e/5'], 'duration': '16', 'accented': 0},
+    {'type': ['e/5'], 'duration': '16', 'accented': 0},{'type': ['e/5'], 'duration': '16', 'accented': 0}, {'type': ['e/5'], 'duration': '8d', 'accented': 0},
+    {'type': ['e/5'], 'duration': '8d', 'accented': 0},],
+   [{'type': ['d/5'], 'duration': '16', 'accented': 0}, {'type': ['d/5'], 'duration': '16', 'accented': 0},{'type': ['d/5'], 'duration': '16', 'accented': 0},
+    {'type': ['d/5'], 'duration': '16', 'accented': 0},{'type': ['d/5'], 'duration': '8d', 'accented': 0},{'type': ['d/5'], 'duration': '8d', 'accented': 0},
+    {'type': ['c/5'], 'duration': '16', 'accented': 0}, {'type': ['c/5'], 'duration': '16', 'accented': 0},
+    {'type': ['c/5'], 'duration': '16', 'accented': 0},{'type': ['c/5'], 'duration': '16', 'accented': 0}, {'type': ['c/5'], 'duration': '8d', 'accented': 0},
+    {'type': ['c/5'], 'duration': '8d', 'accented': 0}],
+   [{'type': ['g/5'], 'duration': '16', 'accented': 0}, {'type': ['g/5'], 'duration': '16', 'accented': 0},{'type': ['g/5'], 'duration': '16', 'accented': 0},
+    {'type': ['g/5'], 'duration': '16', 'accented': 0},{'type': ['g/5'], 'duration': '8d', 'accented': 0},{'type': ['g/5'], 'duration': '8d', 'accented': 0},
+    {'type': ['f/5'], 'duration': '16', 'accented': 0}, {'type': ['f/5'], 'duration': '16', 'accented': 0},
+    {'type': ['f/5'], 'duration': '16', 'accented': 0},{'type': ['f/5'], 'duration': '16', 'accented': 0}, {'type': ['f/5'], 'duration': '8d', 'accented': 0},
+    {'type': ['f/5'], 'duration': '8d', 'accented': 0}],
+   [{'type': ['g/5'], 'duration': '16', 'accented': 0}, {'type': ['g/5'], 'duration': '16', 'accented': 0},{'type': ['g/5'], 'duration': '16', 'accented': 0},
+    {'type': ['g/5'], 'duration': '16', 'accented': 0},{'type': ['g/5'], 'duration': '8d', 'accented': 0},{'type': ['g/5'], 'duration': '8d', 'accented': 0},
+    {'type': ['f/5'], 'duration': '16', 'accented': 0}, {'type': ['f/5'], 'duration': '16', 'accented': 0},
+    {'type': ['f/5'], 'duration': '16', 'accented': 0},{'type': ['f/5'], 'duration': '16', 'accented': 0}, {'type': ['f/5'], 'duration': '8d', 'accented': 0},
+    {'type': ['f/5'], 'duration': '8d', 'accented': 0}],
+   [{'type': ['e/5'], 'duration': '16', 'accented': 0}, {'type': ['e/5'], 'duration': '16', 'accented': 0},{'type': ['e/5'], 'duration': '16', 'accented': 0},
+    {'type': ['e/5'], 'duration': '16', 'accented': 0},{'type': ['e/5'], 'duration': '8d', 'accented': 0},{'type': ['e/5'], 'duration': '8d', 'accented': 0},
+    {'type': ['d/5'], 'duration': '16', 'accented': 0}, {'type': ['d/5'], 'duration': '16', 'accented': 0},
+    {'type': ['d/5'], 'duration': '16', 'accented': 0},{'type': ['d/5'], 'duration': '16', 'accented': 0}, {'type': ['d/5'], 'duration': '8d', 'accented': 0},
+    {'type': ['d/5'], 'duration': '8d', 'accented': 0}],
+   [{'type': ['c/5'], 'duration': '16', 'accented': 0}, {'type': ['c/5'], 'duration': '16', 'accented': 0},{'type': ['c/5'], 'duration': '16', 'accented': 0},
+    {'type': ['c/5'], 'duration': '16', 'accented': 0},{'type': ['c/5'], 'duration': '8d', 'accented': 0},{'type': ['c/5'], 'duration': '8d', 'accented': 0},
+    {'type': ['g/5'], 'duration': '16', 'accented': 0}, {'type': ['g/5'], 'duration': '16', 'accented': 0},
+    {'type': ['g/5'], 'duration': '16', 'accented': 0},{'type': ['g/5'], 'duration': '16', 'accented': 0}, {'type': ['g/5'], 'duration': '8d', 'accented': 0},
+    {'type': ['g/5'], 'duration': '8d', 'accented': 0}],
+   [{'type': ['a/5'], 'duration': '16', 'accented': 0}, {'type': ['a/5'], 'duration': '16', 'accented': 0},{'type': ['a/5'], 'duration': '16', 'accented': 0},
+    {'type': ['a/5'], 'duration': '16', 'accented': 0},{'type': ['a/5'], 'duration': '8d', 'accented': 0},{'type': ['a/5'], 'duration': '8d', 'accented': 0},
+    {'type': ['g/5'], 'duration': '16', 'accented': 0}, {'type': ['g/5'], 'duration': '16', 'accented': 0},
+    {'type': ['g/5'], 'duration': '16', 'accented': 0},{'type': ['g/5'], 'duration': '16', 'accented': 0}, {'type': ['g/5'], 'duration': '8d', 'accented': 0},
+    {'type': ['g/5'], 'duration': '8d', 'accented': 0}],
+   [{'type': ['f/5'], 'duration': '16', 'accented': 0}, {'type': ['f/5'], 'duration': '16', 'accented': 0},{'type': ['f/5'], 'duration': '16', 'accented': 0},
+    {'type': ['f/5'], 'duration': '16', 'accented': 0},{'type': ['f/5'], 'duration': '8d', 'accented': 0},{'type': ['f/5'], 'duration': '8d', 'accented': 0},
+    {'type': ['e/5'], 'duration': '16', 'accented': 0}, {'type': ['e/5'], 'duration': '16', 'accented': 0},
+    {'type': ['e/5'], 'duration': '16', 'accented': 0},{'type': ['e/5'], 'duration': '16', 'accented': 0}, {'type': ['e/5'], 'duration': '8d', 'accented': 0},
+    {'type': ['e/5'], 'duration': '8d', 'accented': 0}],
+   [{'type': ['d/5'], 'duration': '16', 'accented': 0}, {'type': ['d/5'], 'duration': '16', 'accented': 0},{'type': ['d/5'], 'duration': '16', 'accented': 0},
+    {'type': ['d/5'], 'duration': '16', 'accented': 0},{'type': ['d/5'], 'duration': '8d', 'accented': 0},{'type': ['d/5'], 'duration': '8d', 'accented': 0},
+    {'type': ['c/5'], 'duration': '16', 'accented': 0}, {'type': ['c/5'], 'duration': '16', 'accented': 0},
+    {'type': ['c/5'], 'duration': '16', 'accented': 0},{'type': ['c/5'], 'duration': '16', 'accented': 0}, {'type': ['c/5'], 'duration': '8d', 'accented': 0},
+    {'type': ['c/5'], 'duration': '8d', 'accented': 0}]],
+
+    #Twinkle Twinkle Variation B
+
+[[{'type': ['c/5'], 'duration': '8d', 'accented': 0}, {'type': ['c/5'], 'duration': 'q', 'accented': 0},{'type': ['c/5'], 'duration': '8d', 'accented': 0},
+    {'type': ['g/5'], 'duration': '8d', 'accented': 0},{'type': ['g/5'], 'duration': 'q', 'accented': 0},{'type': ['g/5'], 'duration': '8d', 'accented': 0}],
+    [{'type': ['a/5'], 'duration': '8d', 'accented': 0}, {'type': ['a/5'], 'duration': 'q', 'accented': 0},
+    {'type': ['a/5'], 'duration': '8d', 'accented': 0},{'type': ['g/5'], 'duration': '8d', 'accented': 0}, {'type': ['g/5'], 'duration': 'q', 'accented': 0},
+    {'type': ['g/5'], 'duration': '8d', 'accented': 0}],[{'type': ['f/5'], 'duration': '8d', 'accented': 0}, {'type': ['f/5'], 'duration': 'q', 'accented': 0},
+    {'type': ['f/5'], 'duration': '8d', 'accented': 0},{'type': ['e/5'], 'duration': '8d', 'accented': 0}, {'type': ['e/5'], 'duration': 'q', 'accented': 0},
+    {'type': ['e/5'], 'duration': '8d', 'accented': 0}],[{'type': ['d/5'], 'duration': '8d', 'accented': 0}, {'type': ['d/5'], 'duration': 'q', 'accented': 0},
+    {'type': ['d/5'], 'duration': '8d', 'accented': 0},{'type': ['c/5'], 'duration': '8d', 'accented': 0}, {'type': ['c/5'], 'duration': 'q', 'accented': 0},
+    {'type': ['c/5'], 'duration': '8d', 'accented': 0}],[{'type': ['g/5'], 'duration': '8d', 'accented': 0}, {'type': ['g/5'], 'duration': 'q', 'accented': 0},
+    {'type': ['g/5'], 'duration': '8d', 'accented': 0},{'type': ['f/5'], 'duration': '8d', 'accented': 0}, {'type': ['f/5'], 'duration': 'q', 'accented': 0},
+    {'type': ['f/5'], 'duration': '8d', 'accented': 0}],[{'type': ['e/5'], 'duration': '8d', 'accented': 0}, {'type': ['e/5'], 'duration': 'q', 'accented': 0},
+    {'type': ['e/5'], 'duration': '8d', 'accented': 0},{'type': ['d/5'], 'duration': '8d', 'accented': 0}, {'type': ['d/5'], 'duration': 'q', 'accented': 0},
+    {'type': ['d/5'], 'duration': '8d', 'accented': 0}],[{'type': ['g/5'], 'duration': '8d', 'accented': 0}, {'type': ['g/5'], 'duration': 'q', 'accented': 0},
+    {'type': ['g/5'], 'duration': '8d', 'accented': 0},{'type': ['f/5'], 'duration': '8d', 'accented': 0}, {'type': ['f/5'], 'duration': 'q', 'accented': 0},
+    {'type': ['f/5'], 'duration': '8d', 'accented': 0}],[{'type': ['e/5'], 'duration': '8d', 'accented': 0}, {'type': ['e/5'], 'duration': 'q', 'accented': 0},
+    {'type': ['e/5'], 'duration': '8d', 'accented': 0},{'type': ['d/5'], 'duration': '8d', 'accented': 0}, {'type': ['d/5'], 'duration': 'q', 'accented': 0},
+    {'type': ['d/5'], 'duration': '8d', 'accented': 0}],[{'type': ['c/5'], 'duration': '8d', 'accented': 0}, {'type': ['c/5'], 'duration': 'q', 'accented': 0},
+    {'type': ['c/5'], 'duration': '8d', 'accented': 0},{'type': ['g/5'], 'duration': '8d', 'accented': 0}, {'type': ['g/5'], 'duration': 'q', 'accented': 0},
+    {'type': ['g/5'], 'duration': '8d', 'accented': 0}],[{'type': ['a/5'], 'duration': '8d', 'accented': 0}, {'type': ['a/5'], 'duration': 'q', 'accented': 0},
+    {'type': ['a/5'], 'duration': '8d', 'accented': 0},{'type': ['g/5'], 'duration': '8d', 'accented': 0}, {'type': ['g/5'], 'duration': 'q', 'accented': 0},
+    {'type': ['g/5'], 'duration': '8d', 'accented': 0}],[{'type': ['f/5'], 'duration': '8d', 'accented': 0}, {'type': ['f/5'], 'duration': 'q', 'accented': 0},
+    {'type': ['f/5'], 'duration': '8d', 'accented': 0},{'type': ['e/5'], 'duration': '8d', 'accented': 0}, {'type': ['e/5'], 'duration': 'q', 'accented': 0},
+    {'type': ['e/5'], 'duration': '8d', 'accented': 0}],[{'type': ['d/5'], 'duration': '8d', 'accented': 0}, {'type': ['d/5'], 'duration': 'q', 'accented': 0},
+    {'type': ['d/5'], 'duration': '8d', 'accented': 0},{'type': ['c/5'], 'duration': '8d', 'accented': 0}, {'type': ['c/5'], 'duration': 'q', 'accented': 0},
+    {'type': ['c/5'], 'duration': '8d', 'accented': 0}]
+ ],
+
+    # The Honeybee
+
+    [
+      [{'type': ['g/5'], 'duration': 'h', 'accented': 0}, {'type': ['f/5'], 'duration': 'h', 'accented': 0}],
+      [{'type': ['e/5'], 'duration': 'h', 'accented': 0}, {'type': ['b/4'], 'duration': 'hr', 'accented': 0}],
+      [{'type': ['d/5'], 'duration': 'q', 'accented': 0}, {'type': ['e/5'], 'duration': 'q', 'accented': 0},
+       {'type': ['f/5'], 'duration': 'q', 'accented': 0}, {'type': ['d/5'], 'duration': 'q', 'accented': 0}],
+      [{'type': ['c/5'], 'duration': 'h', 'accented': 0}, {'type': ['b/4'], 'duration': 'hr', 'accented': 0}],
+      [{'type': ['e/5'], 'duration': 'q', 'accented': 0}, {'type': ['f/5'], 'duration': 'q', 'accented': 0},
+       {'type': ['g/5'], 'duration': 'q', 'accented': 0}, {'type': ['e/5'], 'duration': 'q', 'accented': 0}],
+      [{'type': ['d/5'], 'duration': 'q', 'accented': 0}, {'type': ['e/5'], 'duration': 'q', 'accented': 0},
+       {'type': ['f/5'], 'duration': 'q', 'accented': 0}, {'type': ['d/5'], 'duration': 'q', 'accented': 0}],
+      [{'type': ['e/5'], 'duration': 'q', 'accented': 0}, {'type': ['f/5'], 'duration': 'q', 'accented': 0},
+       {'type': ['g/5'], 'duration': 'q', 'accented': 0}, {'type': ['e/5'], 'duration': 'q', 'accented': 0}],
+      [{'type': ['d/5'], 'duration': 'q', 'accented': 0}, {'type': ['e/5'], 'duration': 'q', 'accented': 0},
+       {'type': ['f/5'], 'duration': 'q', 'accented': 0}, {'type': ['d/5'], 'duration': 'q', 'accented': 0}],
+      [{'type': ['g/5'], 'duration': 'h', 'accented': 0}, {'type': ['f/5'], 'duration': 'h', 'accented': 0}],
+      [{'type': ['c/5'], 'duration': 'h', 'accented': 0}, {'type': ['b/4'], 'duration': 'hr', 'accented': 0}],
+      [{'type': ['d/5'], 'duration': 'q', 'accented': 0}, {'type': ['e/5'], 'duration': 'q', 'accented': 0},
+       {'type': ['f/5'], 'duration': 'q', 'accented': 0}, {'type': ['d/5'], 'duration': 'q', 'accented': 0}],
+      [{'type': ['c/5'], 'duration': 'h', 'accented': 0}, {'type': ['b/4'], 'duration': 'hr', 'accented': 0}],
+    ],
+
+    # Cuckoo
+
+    [
+    [{'type': ['g/5'], 'duration': 'h', 'accented': 0}, {'type': ['e/5'], 'duration': 'q', 'accented': 0}],
+    [{'type': ['g/5'], 'duration': 'h', 'accented': 0}, {'type': ['e/5'], 'duration': 'q', 'accented': 0}],
+    [{'type': ['d/5'], 'duration': 'q', 'accented': 0}, {'type': ['c/5'], 'duration': 'q', 'accented': 0},{'type': ['d/5'], 'duration': 'q', 'accented': 0}],
+    [{'type': ['e/5'], 'duration': 'h', 'accented': 0}, {'type': ['c/5'], 'duration': 'q', 'accented': 0}],
+    [{'type': ['g/5'], 'duration': 'h', 'accented': 0}, {'type': ['e/5'], 'duration': 'q', 'accented': 0}],
+    [{'type': ['g/5'], 'duration': 'h', 'accented': 0}, {'type': ['e/5'], 'duration': 'q', 'accented': 0}],
+    [{'type': ['d/5'], 'duration': 'q', 'accented': 0}, {'type': ['e/5'], 'duration': 'q', 'accented': 0},{'type': ['d/5'], 'duration': 'q', 'accented': 0}],
+    [{'type': ['c/5'], 'duration': 'h', 'accented': 0}, {'type': ['c/5'], 'duration': 'q', 'accented': 0}],
+    [{'type': ['d/5'], 'duration': 'q', 'accented': 0}, {'type': ['d/5'], 'duration': 'q', 'accented': 0},{'type': ['e/5'], 'duration': 'q', 'accented': 0}],
+    [{'type': ['f/5'], 'duration': 'h', 'accented': 0}, {'type': ['d/5'], 'duration': 'q', 'accented': 0}],
+    [{'type': ['e/5'], 'duration': 'q', 'accented': 0}, {'type': ['e/5'], 'duration': 'q', 'accented': 0},{'type': ['f/5'], 'duration': 'q', 'accented': 0}],
+    [{'type': ['g/5'], 'duration': 'h', 'accented': 0}, {'type': ['e/5'], 'duration': 'q', 'accented': 0}],
+    [{'type': ['g/5'], 'duration': 'h', 'accented': 0}, {'type': ['e/5'], 'duration': 'q', 'accented': 0}],
+    [{'type': ['g/5'], 'duration': 'h', 'accented': 0}, {'type': ['e/5'], 'duration': 'q', 'accented': 0}],
+    [{'type': ['f/5'], 'duration': 'q', 'accented': 0}, {'type': ['e/5'], 'duration': 'q', 'accented': 0},{'type': ['d/5'], 'duration': 'q', 'accented': 0}],
+    [{'type': ['c/5'], 'duration': 'h', 'accented': 0}, {'type': ['c/5'], 'duration': 'q', 'accented': 0}],
+    ],
+
+
+    #Lightly Row
+
+    [
+    [{'type': ['g/5'], 'duration': 'q', 'accented': 0}, {'type': ['e/5'], 'duration': 'q', 'accented': 0},{'type': ['e/5'], 'duration': 'h', 'accented': 0}],
+    [{'type': ['f/5'], 'duration': 'q', 'accented': 0}, {'type': ['d/5'], 'duration': 'q', 'accented': 0},{'type': ['d/5'], 'duration': 'h', 'accented': 0}],
+    [{'type': ['c/5'], 'duration': 'q', 'accented': 0}, {'type': ['d/5'], 'duration': 'q', 'accented': 0},
+     {'type': ['e/5'], 'duration': 'q', 'accented': 0},{'type': ['f/5'], 'duration': 'q', 'accented': 0}],
+    [{'type': ['g/5'], 'duration': 'q', 'accented': 0}, {'type': ['g/5'], 'duration': 'q', 'accented': 0},{'type': ['g/5'], 'duration': 'h', 'accented': 0}],
+    [{'type': ['g/5'], 'duration': 'q', 'accented': 0}, {'type': ['e/5'], 'duration': 'q', 'accented': 0},
+     {'type': ['e/5'], 'duration': 'q', 'accented': 0},{'type': ['e/5'], 'duration': 'q', 'accented': 0}],
+    [{'type': ['f/5'], 'duration': 'q', 'accented': 0}, {'type': ['d/5'], 'duration': 'q', 'accented': 0},
+     {'type': ['d/5'], 'duration': 'q', 'accented': 0},{'type': ['d/5'], 'duration': 'q', 'accented': 0}],
+    [{'type': ['c/5'], 'duration': 'q', 'accented': 0}, {'type': ['e/5'], 'duration': 'q', 'accented': 0},
+     {'type': ['g/5'], 'duration': 'q', 'accented': 0},{'type': ['g/5'], 'duration': 'q', 'accented': 0}],
+    [{'type': ['e/5'], 'duration': 'q', 'accented': 0}, {'type': ['e/5'], 'duration': 'q', 'accented': 0},{'type': ['e/5'], 'duration': 'h', 'accented': 0}],
+    [{'type': ['d/5'], 'duration': 'q', 'accented': 0}, {'type': ['d/5'], 'duration': 'q', 'accented': 0},
+     {'type': ['d/5'], 'duration': 'q', 'accented': 0},{'type': ['d/5'], 'duration': 'q', 'accented': 0}],
+    [{'type': ['d/5'], 'duration': 'q', 'accented': 0}, {'type': ['e/5'], 'duration': 'q', 'accented': 0},{'type': ['f/5'], 'duration': 'h', 'accented': 0}],
+    [{'type': ['e/5'], 'duration': 'q', 'accented': 0}, {'type': ['e/5'], 'duration': 'q', 'accented': 0},
+     {'type': ['e/5'], 'duration': 'q', 'accented': 0},{'type': ['e/5'], 'duration': 'q', 'accented': 0}],
+    [{'type': ['e/5'], 'duration': 'q', 'accented': 0}, {'type': ['f/5'], 'duration': 'q', 'accented': 0},{'type': ['g/5'], 'duration': 'h', 'accented': 0}],
+    [{'type': ['g/5'], 'duration': 'q', 'accented': 0}, {'type': ['e/5'], 'duration': 'q', 'accented': 0},
+    {'type': ['e/5'], 'duration': 'q', 'accented': 0}, {'type': ['e/5'], 'duration': 'q', 'accented': 0}],
+    [{'type': ['f/5'], 'duration': 'q', 'accented': 0}, {'type': ['d/5'], 'duration': 'q', 'accented': 0},
+    {'type': ['d/5'], 'duration': 'q', 'accented': 0}, {'type': ['d/5'], 'duration': 'q', 'accented': 0}],
+    [{'type': ['c/5'], 'duration': 'q', 'accented': 0}, {'type': ['e/5'], 'duration': 'q', 'accented': 0},
+    {'type': ['g/5'], 'duration': 'q', 'accented': 0}, {'type': ['g/5'], 'duration': 'q', 'accented': 0}],
+    [{'type': ['e/5'], 'duration': 'q', 'accented': 0}, {'type': ['e/5'], 'duration': 'q', 'accented': 0},{'type': ['e/5'], 'duration': 'h', 'accented': 0}],
+    ],
+
+
+    #French Children's Song
+
+    [
+    [{'type': ['e/5'], 'duration': 'h', 'accented': 0}, {'type': ['e/5'], 'duration': 'q', 'accented': 0},{'type': ['e/5'], 'duration': 'q', 'accented': 0}],
+    [{'type': ['g/5'], 'duration': 'h', 'accented': 0}, {'type': ['g/5'], 'duration': 'q', 'accented': 0},{'type': ['e/5'], 'duration': 'q', 'accented': 0}],
+    [{'type': ['c/5'], 'duration': 'q', 'accented': 0}, {'type': ['c/5'], 'duration': 'q', 'accented': 0},
+    {'type': ['d/5'], 'duration': 'q', 'accented': 0}, {'type': ['d/5'], 'duration': 'q', 'accented': 0}],
+    [{'type': ['e/5'], 'duration': 'h', 'accented': 0}, {'type': ['c/5'], 'duration': 'h', 'accented': 0}],
+    [{'type': ['e/5'], 'duration': 'h', 'accented': 0}, {'type': ['e/5'], 'duration': 'q', 'accented': 0},{'type': ['e/5'], 'duration': 'q', 'accented': 0}],
+    [{'type': ['g/5'], 'duration': 'h', 'accented': 0}, {'type': ['g/5'], 'duration': 'q', 'accented': 0},{'type': ['e/5'], 'duration': 'q', 'accented': 0}],
+    [{'type': ['c/5'], 'duration': 'q', 'accented': 0}, {'type': ['c/5'], 'duration': 'q', 'accented': 0},
+     {'type': ['d/5'], 'duration': 'q', 'accented': 0}, {'type': ['d/5'], 'duration': 'q', 'accented': 0}],
+    [{'type': ['c/5'], 'duration': 'w', 'accented': 0}],
+    [{'type': ['d/5'], 'duration': 'h', 'accented': 0}, {'type': ['d/5'], 'duration': 'q', 'accented': 0},{'type': ['d/5'], 'duration': 'q', 'accented': 0}],
+    [{'type': ['e/5'], 'duration': 'h', 'accented': 0}, {'type': ['c/5'], 'duration': 'q', 'accented': 0},{'type': ['e/5'], 'duration': 'q', 'accented': 0}],
+    [{'type': ['f/5'], 'duration': 'h', 'accented': 0}, {'type': ['d/5'], 'duration': 'q', 'accented': 0},{'type': ['f/5'], 'duration': 'q', 'accented': 0}],
+    [{'type': ['e/5'], 'duration': 'h', 'accented': 0}, {'type': ['c/5'], 'duration': 'h', 'accented': 0}],
+    [{'type': ['d/5'], 'duration': 'h', 'accented': 0}, {'type': ['d/5'], 'duration': 'q', 'accented': 0},{'type': ['d/5'], 'duration': 'q', 'accented': 0}],
+    [{'type': ['e/5'], 'duration': 'h', 'accented': 0}, {'type': ['c/5'], 'duration': 'q', 'accented': 0},{'type': ['e/5'], 'duration': 'q', 'accented': 0}],
+    [{'type': ['f/5'], 'duration': 'h', 'accented': 0}, {'type': ['d/5'], 'duration': 'q', 'accented': 0},{'type': ['f/5'], 'duration': 'q', 'accented': 0}],
+    [{'type': ['e/5'], 'duration': 'w', 'accented': 0}]
+    ],
+
+
+    #London Bridge
+
+    [
+    [{'type': ['g/5'], 'duration': 'q', 'accented': 0}, {'type': ['g/5'], 'duration': '8d', 'accented': 0},
+     {'type': ['a/5'], 'duration': '8d', 'accented': 0},{'type': ['g/5'], 'duration': 'q', 'accented': 0},
+     {'type': ['f/5'], 'duration': 'q', 'accented': 0}],
+    [{'type': ['e/5'], 'duration': 'q', 'accented': 0}, {'type': ['f/5'], 'duration': 'q', 'accented': 0},{'type': ['g/5'], 'duration': 'h', 'accented': 0}],
+    [{'type': ['d/5'], 'duration': 'q', 'accented': 0}, {'type': ['e/5'], 'duration': 'q', 'accented': 0},{'type': ['f/5'], 'duration': 'h', 'accented': 0}],
+    [{'type': ['e/5'], 'duration': 'q', 'accented': 0}, {'type': ['f/5'], 'duration': 'q', 'accented': 0},{'type': ['g/5'], 'duration': 'h', 'accented': 0}],
+    [{'type': ['g/5'], 'duration': 'q', 'accented': 0}, {'type': ['g/5'], 'duration': '8d', 'accented': 0},
+     {'type': ['a/5'], 'duration': '8d', 'accented': 0},{'type': ['g/5'], 'duration': 'q', 'accented': 0},
+     {'type': ['f/5'], 'duration': 'q', 'accented': 0}],
+    [{'type': ['e/5'], 'duration': 'q', 'accented': 0}, {'type': ['f/5'], 'duration': 'q', 'accented': 0},{'type': ['g/5'], 'duration': 'h', 'accented': 0}],
+    [{'type': ['d/5'], 'duration': 'h', 'accented': 0}, {'type': ['g/5'], 'duration': 'h', 'accented': 0}],
+    [{'type': ['e/5'], 'duration': 'q', 'accented': 0}, {'type': ['c/5'], 'duration': 'h', 'accented': 0}, {'type': ['c/5'], 'duration': 'q', 'accented': 0}],
+    ],
+
+
+    # Mary had a Little Lamb
+
+    [
+        [{'type': ['e/5'], 'duration': 'q', 'accented': 0}, {'type': ['e/5'], 'duration': '8d', 'accented': 0},
+         {'type': ['d/5'], 'duration': '8d', 'accented': 0}, {'type': ['c/5'], 'duration': 'q', 'accented': 0},
+         {'type': ['d/5'], 'duration': 'q', 'accented': 0}],
+        [{'type': ['e/5'], 'duration': 'q', 'accented': 0}, {'type': ['e/5'], 'duration': 'q', 'accented': 0},
+         {'type': ['e/5'], 'duration': 'h', 'accented': 0}],
+        [{'type': ['d/5'], 'duration': 'q', 'accented': 0}, {'type': ['d/5'], 'duration': 'q', 'accented': 0},
+         {'type': ['d/5'], 'duration': 'h', 'accented': 0}],
+        [{'type': ['e/5'], 'duration': 'q', 'accented': 0}, {'type': ['g/5'], 'duration': 'q', 'accented': 0},
+         {'type': ['g/5'], 'duration': 'h', 'accented': 0}],
+        [{'type': ['e/5'], 'duration': 'q', 'accented': 0}, {'type': ['e/5'], 'duration': '8d', 'accented': 0},
+         {'type': ['d/5'], 'duration': '8d', 'accented': 0}, {'type': ['c/5'], 'duration': 'q', 'accented': 0},
+         {'type': ['d/5'], 'duration': 'q', 'accented': 0}],
+        [{'type': ['e/5'], 'duration': 'q', 'accented': 0}, {'type': ['e/5'], 'duration': 'q', 'accented': 0},
+         {'type': ['e/5'], 'duration': 'h', 'accented': 0}],
+        [{'type': ['d/5'], 'duration': 'q', 'accented': 0}, {'type': ['d/5'], 'duration': '8d', 'accented': 0},
+         {'type': ['d/5'], 'duration': '8d', 'accented': 0}, {'type': ['e/5'], 'duration': 'q', 'accented': 0}, {'type': ['d/5'], 'duration': 'q', 'accented': 0}],
+        [{'type': ['c/5'], 'duration': 'w', 'accented': 0}],
+
+    ],
+
+
+
+
+
+
+
 ]
 
