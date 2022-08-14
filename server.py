@@ -79,9 +79,9 @@ def sendBlob():
 def runRNN():
     if request.method == 'POST':
         data = request.json['data']
+        meter = request.json['meter']
         UserPath = "rnnModel/generatedMelodies"
-        response = runRnn(data, UserPath)
-        print(response)
+        response = runRnn(data, UserPath,meter)
         return Response(response, status=200)
 @app.route('/runMusicat', methods=['POST'])
 def runMusicat():
@@ -110,7 +110,42 @@ def runMusicat():
         print(response)
         return Response(response,status=200)
 
+@app.route('/submitComposition', methods=['POST'])
+def submitComposition():
+    if request.method == 'POST':
+        '''#conn = get_db_connection()
 
+        #jwtToken = request.form['jwtToken']
+        #count = request.form['count']
+        #try:
+           # decodedToken = jwt.decode(jwtToken, SECRET_KEY, algorithms=["HS256"])
+        except:
+            return "JWT Token expired", 401
+        subjectId = decodedToken['id']
+        composition_uuid = str(uuid.uuid4())
+        '''
+        # composition = request.form['composition']
+
+        # result = run(os.getcwd()+"/RhythmCat.exe", composition)
+        # conn.execute("INSERT INTO compositions (id,fk,filepath) VALUES( ?,?,?)", (composition_uuid, subjectId, midfilepath))
+        # conn.commit()
+        # conn.close()
+        data = request.json['data']
+
+
+        response = {}
+        orig,flex,fluency = calculateCreativityScores(data)
+        response['originality'] = orig
+        response['flexability'] = flex
+        response['fluency'] = fluency
+
+        # store values in db
+        # store composition in db
+        # run musicat and produce the png
+        # return also the results from musicats computation
+        response = json.dumps(response)
+        print(response)
+        return Response(response, status=200)
 
 
 
@@ -135,9 +170,14 @@ def runCreativityScoring():
         # conn.commit()
         # conn.close()
         data = request.json['data']
-        flex, orig = calculateCreativityScores(data)
 
 
-        response = calculateCreativityScores(data)
+        response = {}
+        orig,flex,fluency = calculateCreativityScores(data)
+        response['originality'] = orig
+        response['flexability'] = flex
+        response['fluency'] = fluency
+
+        response = json.dumps(response)
         print(response)
         return Response(response, status=200)

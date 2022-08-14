@@ -14,7 +14,7 @@ midiSharps = ["A#","B#","C#","D#","E#","F#","G#"]
 midiB = ["A-","B-","C-","D-","E-","F-","G-"]
 midiToComposition = {"A":"a","B":"b","C":"c","D":"d","E":"e","F":"f","G":"g","rest":"r"}
 midiToDuration = {"16th":"16","eighth":"8d","quarter":"q","half":"h","whole":"w"}
-
+midiToDurationCnt = {"16th":1,"eighth":2,"quarter":4,"half":8,"whole":16}
 compToMidi = {"g/3":55,"a/3":57,"b/3":59,"c/4":60,"d/4":62,"e/4":64,"f/4":65,"g/4":67,"a/4":69,"b/4":71,"c/5":72
               ,"d/5":74,"e/5":76,"f/5":77,"g/5":79,"a/5":81,"b/5":83,"c/6":84}
 
@@ -55,11 +55,12 @@ def convertToMusicat(composition):
     return musicatString
 
 restDuration = {"16":"16r","8d":"8r","q":"qr","h":"hr","w":"wr"}
-def convertMidiToScore(file, numberOfMeasures):
+def convertMidiToScore(file, numberOfNotes, measureNoteCount):
     mf = midi.MidiFile()
     mf.open("rnnModel/generatedMelodies/"+file)
     mf.read()
-
+    measureNoteCount_ = measureNoteCount
+    print(measureNoteCount_)
     s = midi.translate.midiFileToStream(mf)
 
     mf.close()
@@ -67,22 +68,60 @@ def convertMidiToScore(file, numberOfMeasures):
     resultDuration = []
     resultAccent = []
     noteToAdd = ""
+    cnt = 0
     for thisnote in s.recurse().notesAndRests:
+        cnt= cnt+1
         if thisnote.duration.type == 'complex':
             return None, None, None
         m21noteDuration = midiToDuration[thisnote.duration.type]
         m21noteName = thisnote.name
+        noteDurationInt = midiToDurationCnt[thisnote.duration.type]
 
 
-        if thisnote.measureNumber < numberOfMeasures+1:
+        if cnt < numberOfNotes:
             continue
         else:
+            measureNoteCount_ = measureNoteCount_ - noteDurationInt
+            if measureNoteCount_ <= 0:
+                if measureNoteCount_ < 0:
+                    for dur, val in midiToDurationCnt.items():
+                        if val == abs(measureNoteCount_):
+                            m21noteDuration = midiToDuration[dur]
+                            if m21noteName == "rest":
+                                dur = restDuration[m21noteDuration]
+
+                                resultDuration.append(dur)
+                                resultNotes.append("b/4")
+                                resultAccent.append(0)
+                                return resultDuration, resultNotes, resultAccent
+                            m21noteOctave = thisnote.octave
+                            if m21noteName in midiSharps:
+                                noteToAdd += midiToComposition[m21noteName[0]]
+                                noteToAdd += "/"
+                                resultAccent.append(1)
+                            elif m21noteName in midiB:
+                                noteToAdd += midiToComposition[m21noteName[0]]
+                                noteToAdd += "/"
+                                resultAccent.append(2)
+                            else:
+                                noteToAdd += midiToComposition[m21noteName]
+                                noteToAdd += "/"
+                                resultAccent.append(0)
+                            noteToAdd += str(m21noteOctave)
+                            resultNotes.append(noteToAdd)
+                            noteToAdd = ""
+                            resultDuration.append(m21noteDuration)
+                            return resultDuration, resultNotes, resultAccent
+
+                return resultDuration, resultNotes,resultAccent
             if m21noteName == "rest":
 
                 dur = restDuration[m21noteDuration]
+
                 resultDuration.append(dur)
                 resultNotes.append("b/4")
                 resultAccent.append(0)
+
                 continue
             m21noteOctave = thisnote.octave
             if m21noteName in midiSharps:
@@ -102,6 +141,7 @@ def convertMidiToScore(file, numberOfMeasures):
             resultNotes.append(noteToAdd)
             noteToAdd = ""
             resultDuration.append(m21noteDuration)
+
     return  resultDuration, resultNotes,resultAccent
 
 

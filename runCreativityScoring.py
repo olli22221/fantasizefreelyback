@@ -1,4 +1,18 @@
 from converter import calculateMidiPitch
+import editdistance
+from GroundCompositions.groundValues import groundCompositions
+
+testData1 = [[{'type': ['a/3'], 'duration': 'q', 'accented': 0}, {'type': ['c/4'], 'duration': 'q', 'accented': 0},
+              {'type': ['d/4'], 'duration': 'q', 'accented': 0}],
+             [{'type': ['f/5'], 'duration': 'q', 'accented': 0}, {'type': ['f/4'], 'duration': 'q', 'accented': 0},
+              {'type': ['g/4'], 'duration': 'q', 'accented': 0}],
+             [{'type': ['d/5'], 'duration': '8d', 'accented': 0}, {'type': ['e/5'], 'duration': '8d', 'accented': 0},
+              {'type': ['f/5'], 'duration': '8d', 'accented': 0}, {'type': ['e/4'], 'duration': '8d', 'accented': 0},
+              {'type': ['f/4'], 'duration': '8d', 'accented': 0}, {'type': ['g/4'], 'duration': '8d', 'accented': 0}],
+             [{'type': ['e/5'], 'duration': '8d', 'accented': 0}, {'type': ['b/5'], 'duration': '8d', 'accented': 0},
+              {'type': ['a/5'], 'duration': '8d', 'accented': 0}, {'type': ['e/4'], 'duration': '8d', 'accented': 0},
+              {'type': ['f/4'], 'duration': '8d', 'accented': 0}, {'type': ['d/4'], 'duration': '8d', 'accented': 0}]]
+
 
 def calculateCreativityScores(data):
 
@@ -6,8 +20,18 @@ def calculateCreativityScores(data):
     numberOfConcepts = len(pitchesVector)
     durationVector = computeDurationVector(data)
     flex = calculateFlexibility(pitchesVector,durationVector)
-    #orig = calculateOriginality()
-    return flex/numberOfConcepts
+    #userCompositions = getUserCompositions()
+    fluency = computeFluency(data)
+    orig = calculateOriginality(testData1,groundCompositions)
+
+    return orig/len(groundCompositions),flex/numberOfConcepts,fluency
+
+def computeFluency(data):
+    cnt = 0
+    for measure in data:
+        for note in measure:
+            cnt += 1
+    return cnt
 
 def computePitchVector(input):
     pitches = []
@@ -46,8 +70,6 @@ def calculateFlexibility(pitches, durations):
             result += calculateDurationDiff(durations[i],durations[j])
     return result
 
-def calculateOriginality(data):
-    pass
 
 midiToDuration = {"16":4,"8d":3,"q":2,"h":1,"w":0}
 midiDuplication = {"16":1,"8d":2,"q":4,"w":16}
@@ -86,11 +108,34 @@ def expandMeasure(measure):
             result.append(note)
     return result
 
+def prepareComposition(composition):
+    result = []
+    for measure in composition:
+        for note in measure:
+            tmpStr = note['type'][0]+note['duration']+str(note['accented'])
+            result.append(tmpStr)
+    return result
+
+def levensteindistance(composition1,composition2):
+
+    comp1 = prepareComposition(composition1)
+    comp2 = prepareComposition(composition2)
+    return editdistance.eval(comp1,comp2)
+
+def calculateOriginality(userComposition,groundCompositions):
+    result = 0
+    for groundComposition in groundCompositions:
+        result += levensteindistance(userComposition,groundComposition)
+    return result
+
 
 
 def main():
-    testData = [[{'type': ['a/3'], 'duration': 'q', 'accented': 0}, {'type': ['c/4'], 'duration': 'q', 'accented': 0}, {'type': ['d/4'], 'duration': 'q', 'accented': 0}], [{'type': ['f/5'], 'duration': 'q', 'accented': 0}, {'type': ['f/4'], 'duration': 'q', 'accented': 0}, {'type': ['g/4'], 'duration': 'q', 'accented': 0}], [{'type': ['d/5'], 'duration': '8d', 'accented': 0}, {'type': ['e/5'], 'duration': '8d', 'accented': 0}, {'type': ['f/5'], 'duration': '8d', 'accented': 0}, {'type': ['e/4'], 'duration': '8d', 'accented': 0}, {'type': ['f/4'], 'duration': '8d', 'accented': 0}, {'type': ['g/4'], 'duration': '8d', 'accented': 0}], [{'type': ['e/5'], 'duration': '8d', 'accented': 0}, {'type': ['b/5'], 'duration': '8d', 'accented': 0}, {'type': ['a/5'], 'duration': '8d', 'accented': 0}, {'type': ['e/4'], 'duration': '8d', 'accented': 0}, {'type': ['f/4'], 'duration': '8d', 'accented': 0}, {'type': ['d/4'], 'duration': '8d', 'accented': 0}]]
-    print(calculateCreativityScores(testData))
+    testData1 =  [[{'type': ['a/3'], 'duration': 'q', 'accented': 0}, {'type': ['c/4'], 'duration': 'q', 'accented': 0}, {'type': ['d/4'], 'duration': 'q', 'accented': 0}], [{'type': ['f/5'], 'duration': 'q', 'accented': 0}, {'type': ['f/4'], 'duration': 'q', 'accented': 0}, {'type': ['g/4'], 'duration': 'q', 'accented': 0}], [{'type': ['d/5'], 'duration': '8d', 'accented': 0}, {'type': ['e/5'], 'duration': '8d', 'accented': 0}, {'type': ['f/5'], 'duration': '8d', 'accented': 0}, {'type': ['e/4'], 'duration': '8d', 'accented': 0}, {'type': ['f/4'], 'duration': '8d', 'accented': 0}, {'type': ['g/4'], 'duration': '8d', 'accented': 0}], [{'type': ['e/5'], 'duration': '8d', 'accented': 0}, {'type': ['b/5'], 'duration': '8d', 'accented': 0}, {'type': ['a/5'], 'duration': '8d', 'accented': 0}, {'type': ['e/4'], 'duration': '8d', 'accented': 0}, {'type': ['f/4'], 'duration': '8d', 'accented': 0}, {'type': ['d/4'], 'duration': '8d', 'accented': 0}]]
+
+    testData = [[ {'type': ['b/3'], 'duration': 'q', 'accented': 0}, {'type': ['d/4'], 'duration': 'q', 'accented': 0}], [{'type': ['f/5'], 'duration': 'q', 'accented': 0}, {'type': ['f/4'], 'duration': 'q', 'accented': 0}, {'type': ['g/4'], 'duration': 'q', 'accented': 0}], [{'type': ['d/5'], 'duration': '8d', 'accented': 0}, {'type': ['e/5'], 'duration': '8d', 'accented': 0}, {'type': ['f/5'], 'duration': '8d', 'accented': 0}, {'type': ['e/4'], 'duration': '8d', 'accented': 0}, {'type': ['f/4'], 'duration': '8d', 'accented': 0}, {'type': ['g/4'], 'duration': '8d', 'accented': 0}], [{'type': ['e/5'], 'duration': '8d', 'accented': 0}, {'type': ['b/5'], 'duration': '8d', 'accented': 0}, {'type': ['a/5'], 'duration': '8d', 'accented': 0}, {'type': ['e/4'], 'duration': '8d', 'accented': 0}, {'type': ['f/4'], 'duration': '8d', 'accented': 0}, {'type': ['d/4'], 'duration': '8d', 'accented': 0}]]
+    #print(calculateCreativityScores(testData))
+    print(calculateOriginality(testData1, groundCompositions))
 
 if __name__ == "__main__":
     main()
