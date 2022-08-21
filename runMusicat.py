@@ -3,11 +3,11 @@ from converter import convertMidiToMusicat, convertToMusicat
 import os ,json
 import time
 
-def run(pathToMusicat, input):
+def run(pathToMusicat, input, pathToImageDir):
     print(input)
     inputToMusicat = convertToMusicat(input)
     now = time.time()
-    result = subprocess.run([pathToMusicat,"noGUI", "input="+inputToMusicat, "png=\"out.png\""],stdout=subprocess.PIPE)
+    result = subprocess.run([pathToMusicat,"noGUI", "input="+inputToMusicat, "png="+pathToImageDir+"out.png"],stdout=subprocess.PIPE)
     now_ = time.time()
     diff = now - now_
     print(diff)

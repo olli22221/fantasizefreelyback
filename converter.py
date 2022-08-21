@@ -57,10 +57,9 @@ def convertToMusicat(composition):
 restDuration = {"16":"16r","8d":"8r","q":"qr","h":"hr","w":"wr"}
 def convertMidiToScore(file, numberOfNotes, measureNoteCount):
     mf = midi.MidiFile()
-    mf.open("rnnModel/generatedMelodies/"+file)
+    mf.open(file)
     mf.read()
     measureNoteCount_ = measureNoteCount
-    print(measureNoteCount_)
     s = midi.translate.midiFileToStream(mf)
 
     mf.close()

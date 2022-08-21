@@ -22,15 +22,17 @@ def calculateCreativityScores(data):
     flex = calculateFlexibility(pitchesVector,durationVector)
     #userCompositions = getUserCompositions()
     fluency = computeFluency(data)
-    orig = calculateOriginality(testData1,groundCompositions)
+    orig = calculateOriginality(data,groundCompositions)
 
     return orig/len(groundCompositions),flex/numberOfConcepts,fluency
+
+noteWeights = {"16":8,"8d":6,"q":4,"h":2,"w":1}
 
 def computeFluency(data):
     cnt = 0
     for measure in data:
         for note in measure:
-            cnt += 1
+            cnt += noteWeights[note['duration']]
     return cnt
 
 def computePitchVector(input):
@@ -38,7 +40,7 @@ def computePitchVector(input):
 
     for measure in input:
         expandedMeasure = expandMeasure(measure)
-
+        print(len(expandedMeasure))
         tmpVector = []
         for note in expandedMeasure:
 
@@ -72,11 +74,12 @@ def calculateFlexibility(pitches, durations):
 
 
 midiToDuration = {"16":4,"8d":3,"q":2,"h":1,"w":0}
-midiDuplication = {"16":1,"8d":2,"q":4,"w":16}
+midiDuplication = {"16":1,"8d":2,"q":4,"h":8,"w":16}
 
 def calculateDurationDiff(measure1, measure2):
     result = 0
-    for i in range(len(measure1)):
+    iterations = min(len(measure1), len(measure2))
+    for i in range(iterations):
         result += abs(measure2[i] - measure1[i])
     return result
 
@@ -85,13 +88,8 @@ def calculateDurationValue(duration):
 
 def calculateMeasureDiff(measure1, measure2):
     result = 0
-    for i in range(len(measure1)):
-        result += abs(measure2[i] - measure1[i])
-    return result
-
-def calculateMeasureDiff(measure1, measure2):
-    result = 0
-    for i in range(len(measure1)):
+    iterations = min(len(measure1),len(measure2))
+    for i in range(iterations):
         result += abs(measure2[i] - measure1[i])
     return result
 

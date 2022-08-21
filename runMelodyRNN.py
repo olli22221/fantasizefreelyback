@@ -20,16 +20,18 @@ def clearUserPath(path):
 def getSuggestions(path,numberOfNotes,measureNoteCount):
     suggestions = []
     for file in os.listdir(path):
-         duration, notes, accent = convertMidiToScore(file,numberOfNotes,measureNoteCount)
+         duration, notes, accent = convertMidiToScore(path+"/"+file,numberOfNotes,measureNoteCount)
          suggestions.append([duration,notes, accent])
-    print(suggestions)
     return suggestions
 
 
 def computeLength(composition):
     cnt = 0
+
     for measure in composition:
-        for note in composition:
+
+        for note in measure:
+
             cnt = cnt + 1
     return cnt
 
