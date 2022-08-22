@@ -1,5 +1,5 @@
 import base64
-import os, jwt
+import os, jwt, datetime
 import sqlite3, uuid, datetime, json
 import time
 from runMelodyRNN import runRnn
@@ -166,8 +166,12 @@ def submitComposition():
         pathToComposition = USER_DIR + subjectId + "/" + composition_uuid + "/compositionData.json"
         with open(pathToComposition,'w') as f:
             json.dump(jsonComposition,f)
-        conn.execute("""INSERT INTO compositions (id,fk,filepath,composition) VALUES( ?,?,?,?);""",
-                     (composition_uuid, subjectId, pathToImageDir, pathToComposition))
+        now = datetime.datetime.now()
+        date_time = now.strftime("%m/%d/%Y, %H:%M:%S")
+        print(type(date_time))
+        conn.execute("""INSERT INTO compositions (id,fk,filepath,pathToComposition,timestamp) VALUES( ?,?,?,?,?);""",
+                     (composition_uuid, subjectId, pathToImageDir, pathToComposition, date_time))
+        conn.commit()
 
         print(pathToImageDir)
         result = run(os.getcwd() + "/RhythmCat.exe", data, pathToImageDir)
@@ -175,6 +179,10 @@ def submitComposition():
         print(result)
         response = {}
         orig,flex,fluency = calculateCreativityScores(data)
+        score_uuid = str(uuid.uuid4())
+        conn.execute("""INSERT INTO Scores (id,composition,fluency,flexability,originality)VALUES( ?,?,?,?,?);""",
+                     (score_uuid, composition_uuid, fluency, flex, orig))
+        conn.commit()
         response['originality'] = orig
         response['flexability'] = flex
         response['fluency'] = fluency
@@ -189,7 +197,6 @@ def submitComposition():
         # run musicat and produce the png
         # return also the results from musicats computation
         response = json.dumps(response)
-        print(response)
         return Response(response, status=200)
 
 
