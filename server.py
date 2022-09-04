@@ -8,15 +8,29 @@ from flask import Flask, request,Response, jsonify, send_file
 from flask_cors import CORS
 from dotenv import load_dotenv
 from runCreativityScoring import calculateCreativityScores
-
+from prometheus_flask_exporter import PrometheusMetrics
 import wave
 load_dotenv()
 app = Flask(__name__)
 cors = CORS(app)
+metrics = PrometheusMetrics(app)
 
 
 SECRET_KEY = os.getenv("MY_SECRET")
 USER_DIR = os.getenv("USER_DIR")
+
+metrics.info('app_info', 'Application info', version='1.0.3')
+
+
+
+
+
+common_counter = metrics.counter(
+    'by_path_counter', 'Request count by request paths',
+    labels={'path': lambda: request.path}
+)
+
+
 
 def get_db_connection():
     conn = sqlite3.connect('db.sqlite')
@@ -46,7 +60,10 @@ def upload_file():
         conn.close()
         return Response(result, status=200)
 
+
+
 @app.route('/start', methods=['GET'])
+@common_counter
 def startApp():
     conn = get_db_connection()
     subject_uuid = str(uuid.uuid4())
@@ -54,8 +71,9 @@ def startApp():
     conn.execute("INSERT INTO subject (id) VALUES( '%s')" % subject_uuid)
     conn.commit()
     conn.close()
-    os.mkdir(USER_DIR + subject_uuid)
-    os.mkdir(USER_DIR + subject_uuid + "/generatedMelodies")
+    os.mkdir(os.getcwd()+"/../userData/" + subject_uuid)
+    os.mkdir(os.getcwd()+"/../userData/" + subject_uuid + "/generatedMelodies")
+    os.mkdir(os.getcwd()+"/../userData/"+ subject_uuid + "/compositions")
 
     encoded_jwt = jwt.encode({"id": subject_uuid,"exp": datetime.datetime.now(tz=datetime.timezone.utc) + datetime.timedelta(seconds=30000)}, SECRET_KEY, algorithm="HS256")
     print(encoded_jwt)
@@ -79,11 +97,13 @@ def sendBlob():
 
 
 @app.route('/runRNN', methods=['POST'])
+@common_counter
 def runRNN():
     if request.method == 'POST':
         data = request.json['data']
         meter = request.json['meter']
         jwtToken = request.json['jwtToken']
+        temperature = request.json['temperature']
         try:
             decodedToken = jwt.decode(jwtToken, SECRET_KEY, algorithms=["HS256"])
         except:
@@ -91,9 +111,12 @@ def runRNN():
         subjectId = decodedToken['id']
 
         UserPath = USER_DIR + subjectId + "/generatedMelodies"
-        response = runRnn(data, UserPath,meter)
+        response = runRnn(data, UserPath,meter,temperature)
         return Response(response, status=200)
+
+
 @app.route('/runMusicat', methods=['POST'])
+@common_counter
 def runMusicat():
     if request.method == 'POST':
 
@@ -120,7 +143,10 @@ def runMusicat():
         print(response)
         return Response(response,status=200)
 
+
+
 @app.route('/submitComposition', methods=['POST'])
+@common_counter
 def submitComposition():
     if request.method == 'POST':
         '''#conn = get_db_connection()
@@ -151,7 +177,18 @@ def submitComposition():
         composition_uuid = str(uuid.uuid4())
         subjectId = decodedToken['id']
         data = request.json['data']
-        print(type(data))
+        pathToCompositions = USER_DIR + subjectId + "/compositions/"
+
+        userCompositions = []
+        for file in os.listdir(pathToCompositions):
+
+            with open(pathToCompositions + file+"/compositionData.json") as tmpFile:
+                jsonData = json.load(tmpFile)
+                jsonData = json.loads(jsonData)
+
+                userCompositions.append(jsonData)
+
+        orig,flex,fluency = calculateCreativityScores(data,userCompositions) 
 
         cur.execute("SELECT * FROM compositions WHERE id=?",(composition_uuid,))
         row = cur.fetchone()
@@ -159,26 +196,32 @@ def submitComposition():
             composition_uuid = str(uuid.uuid4())
             cur.execute("SELECT * FROM compositions WHERE id=?",(composition_uuid,))
             row = cur.fetchone()
-        os.mkdir(USER_DIR + subjectId + "/" + composition_uuid )
-        os.mkdir(USER_DIR + subjectId + "/" + composition_uuid + "/musicatPNG")
-        pathToImageDir = USER_DIR + subjectId + "/" + composition_uuid + "/musicatPNG/"
+        os.mkdir(USER_DIR + subjectId + "/compositions/" + composition_uuid )
+        os.mkdir(USER_DIR + subjectId + "/compositions/" + composition_uuid + "/musicatPNG")
+        pathToImageDir = USER_DIR + subjectId + "/compositions/" + composition_uuid + "/musicatPNG/"
         jsonComposition = json.dumps(data)
-        pathToComposition = USER_DIR + subjectId + "/" + composition_uuid + "/compositionData.json"
+        pathToComposition = USER_DIR + subjectId + "/compositions/" + composition_uuid + "/compositionData.json"
+
+
+       
         with open(pathToComposition,'w') as f:
             json.dump(jsonComposition,f)
         now = datetime.datetime.now()
         date_time = now.strftime("%m/%d/%Y, %H:%M:%S")
-        print(type(date_time))
+    
         conn.execute("""INSERT INTO compositions (id,fk,filepath,pathToComposition,timestamp) VALUES( ?,?,?,?,?);""",
                      (composition_uuid, subjectId, pathToImageDir, pathToComposition, date_time))
         conn.commit()
 
         print(pathToImageDir)
         result = run(os.getcwd() + "/RhythmCat.exe", data, pathToImageDir)
-
+        analogies = result["analogies"]
+        groups = result["groups"]
+        strengths = result["strengths"]
         print(result)
         response = {}
-        orig,flex,fluency = calculateCreativityScores(data)
+    
+        
         score_uuid = str(uuid.uuid4())
         conn.execute("""INSERT INTO Scores (id,composition,fluency,flexability,originality)VALUES( ?,?,?,?,?);""",
                      (score_uuid, composition_uuid, fluency, flex, orig))
@@ -186,6 +229,9 @@ def submitComposition():
         response['originality'] = orig
         response['flexability'] = flex
         response['fluency'] = fluency
+        response['analogies'] = analogies
+        response['groups'] = groups
+        response['strengths'] = strengths
         with open(pathToImageDir+"out.png",'rb') as musicatImage:
             im_bytes = musicatImage.read()
         encoded = base64.b64encode(im_bytes).decode("utf8")
@@ -204,17 +250,28 @@ def submitComposition():
 @app.route('/calculateCreativity', methods=['POST'])
 def runCreativityScoring():
     if request.method == 'POST':
-        '''#conn = get_db_connection()
+        conn = get_db_connection()
 
-        #jwtToken = request.form['jwtToken']
+        jwtToken = request.json['jwtToken']
         #count = request.form['count']
-        #try:
-           # decodedToken = jwt.decode(jwtToken, SECRET_KEY, algorithms=["HS256"])
+        try:
+            decodedToken = jwt.decode(jwtToken, SECRET_KEY, algorithms=["HS256"])
         except:
             return "JWT Token expired", 401
         subjectId = decodedToken['id']
-        composition_uuid = str(uuid.uuid4())
-        '''
+        pathToCompositions = USER_DIR + subjectId + "/compositions/"
+        
+        userCompositions = []
+        for file in os.listdir(pathToCompositions):
+           
+            with open(pathToCompositions + file+"/compositionData.json") as tmpFile:
+                jsonData = json.load(tmpFile)
+                jsonData = json.loads(jsonData)
+                
+                userCompositions.append(jsonData)
+
+        
+        
         # composition = request.form['composition']
 
         # result = run(os.getcwd()+"/RhythmCat.exe", composition)
@@ -225,7 +282,7 @@ def runCreativityScoring():
 
 
         response = {}
-        orig,flex,fluency = calculateCreativityScores(data)
+        orig,flex,fluency = calculateCreativityScores(data,userCompositions)
         response['originality'] = orig
         response['flexability'] = flex
         response['fluency'] = fluency
@@ -233,3 +290,9 @@ def runCreativityScoring():
         response = json.dumps(response)
         print(response)
         return Response(response, status=200)
+
+
+
+metrics.register_default(
+    common_counter
+)

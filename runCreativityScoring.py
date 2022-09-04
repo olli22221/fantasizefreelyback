@@ -14,15 +14,16 @@ testData1 = [[{'type': ['a/3'], 'duration': 'q', 'accented': 0}, {'type': ['c/4'
               {'type': ['f/4'], 'duration': '8d', 'accented': 0}, {'type': ['d/4'], 'duration': '8d', 'accented': 0}]]
 
 
-def calculateCreativityScores(data):
-
+def calculateCreativityScores(data,userCompositions):
+    groundAndUserCompositions = userCompositions + groundCompositions
+    
     pitchesVector = computePitchVector(data)
     numberOfConcepts = len(pitchesVector)
     durationVector = computeDurationVector(data)
     flex = calculateFlexibility(pitchesVector,durationVector)
     #userCompositions = getUserCompositions()
     fluency = computeFluency(data)
-    orig = calculateOriginality(data,groundCompositions)
+    orig = calculateOriginality(data,groundAndUserCompositions)
 
     return orig/len(groundCompositions),flex/numberOfConcepts,fluency
 
@@ -120,10 +121,10 @@ def levensteindistance(composition1,composition2):
     comp2 = prepareComposition(composition2)
     return editdistance.eval(comp1,comp2)
 
-def calculateOriginality(userComposition,groundCompositions):
+def calculateOriginality(userComposition,ground_compositions):
     result = 0
-    for groundComposition in groundCompositions:
-        result += levensteindistance(userComposition,groundComposition)
+    for ground_composition in ground_compositions:
+        result += levensteindistance(userComposition,ground_composition)
     return result
 
 

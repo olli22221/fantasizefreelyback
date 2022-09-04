@@ -43,8 +43,8 @@ def run(pathToMusicat, input, pathToImageDir):
     response['meta_groups'] = meta_groups
     response['strengths'] = strengths
 
-    response = json.dumps(response)
-    print(response)
+
+
 
 
     return response

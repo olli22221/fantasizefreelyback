@@ -1,6 +1,6 @@
 from music21 import *
 import os
-from midi2audio import FluidSynth
+
 
 
 durationDict = {"16th":"S","eighth":"E","quarter":"Q","half":"H","whole":"W"}
@@ -90,10 +90,14 @@ def convertMidiToScore(file, numberOfNotes, measureNoteCount):
                                 dur = restDuration[m21noteDuration]
 
                                 resultDuration.append(dur)
-                                resultNotes.append("b/4")
+                                resultNotes.append("r")
                                 resultAccent.append(0)
                                 return resultDuration, resultNotes, resultAccent
                             m21noteOctave = thisnote.octave
+                            if m21noteOctave == 3 and m21noteName in ["c","d","e","f"]:
+                                m21noteOctave+=1
+                            elif m21noteOctave == 6 and m21noteName in ["d","e","f","g","a","b"]:
+                                m21noteOctave-=1
                             if m21noteName in midiSharps:
                                 noteToAdd += midiToComposition[m21noteName[0]]
                                 noteToAdd += "/"
@@ -118,7 +122,7 @@ def convertMidiToScore(file, numberOfNotes, measureNoteCount):
                 dur = restDuration[m21noteDuration]
 
                 resultDuration.append(dur)
-                resultNotes.append("b/4")
+                resultNotes.append("r")
                 resultAccent.append(0)
 
                 continue
