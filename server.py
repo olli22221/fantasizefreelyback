@@ -218,20 +218,21 @@ def submitComposition():
         analogies = result["analogies"]
         groups = result["groups"]
         strengths = result["strengths"]
-        print(result)
+        
+        totalResult, musicat = computeTotalResult(orig,flex,fluency,analogies,groups,data)
         response = {}
     
         
         score_uuid = str(uuid.uuid4())
-        conn.execute("""INSERT INTO Scores (id,composition,fluency,flexability,originality)VALUES( ?,?,?,?,?);""",
-                     (score_uuid, composition_uuid, fluency, flex, orig))
+        conn.execute("""INSERT INTO Scores (id,composition,fluency,flexability,originality,total,musicat)VALUES( ?,?,?,?,?,?,?);""",
+                     (score_uuid, composition_uuid, fluency, flex, orig,totalResult,musicat))
         conn.commit()
-        response['originality'] = orig
-        response['flexability'] = flex
-        response['fluency'] = fluency
-        response['analogies'] = analogies
-        response['groups'] = groups
-        response['strengths'] = strengths
+        
+        
+        
+        
+        response['totalScore'] = totalResult
+        
         with open(pathToImageDir+"out.png",'rb') as musicatImage:
             im_bytes = musicatImage.read()
         encoded = base64.b64encode(im_bytes).decode("utf8")
@@ -244,6 +245,19 @@ def submitComposition():
         # return also the results from musicats computation
         response = json.dumps(response)
         return Response(response, status=200)
+
+
+def computeTotalResult(orig,flex,fluency,analogies,groups,score):
+    scoreLen = len(score)
+    minAnalogies = scoreLen/2
+    minGroups = scoreLen
+    analogiesScore = len(analogies)/minAnalogies
+    groupsScore = len(groups)/(minGroups-2)
+    musicatScore = (analogiesScore+groupsScore)/2
+    creativityScore = (orig+flex+fluency)/3
+    totalScore = creativityScore*musicatScore
+    return totalScore, musicatScore
+
 
 
 

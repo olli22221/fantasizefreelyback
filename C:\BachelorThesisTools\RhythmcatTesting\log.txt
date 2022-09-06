@@ -52,3 +52,7 @@ System.IndexOutOfRangeException: Index was outside the bounds of the array.
   at RhythmCat.PickAlphabetForGroupCodelet.Run () [0x0007a] in <4b3e3b29f4a24f7fbb516fefcab29bf6>:0 
   at RhythmCat.Coderack.RunNextCodelet () [0x00160] in <4b3e3b29f4a24f7fbb516fefcab29bf6>:0 
   at RhythmCat.Program.Main (System.String[] args) [0x005db] in <4b3e3b29f4a24f7fbb516fefcab29bf6>:0 
+System.ArgumentException: Measure '' not parsed.
+  at RhythmCat.Rhythm..ctor (System.String measureStr, System.Boolean incomingTie, System.Boolean& tieToNextMeasure, System.Int32& defaultOctave) [0x00043] in <670f698051e040d8977395188bc8edfd>:0 
+  at RhythmCat.Rhythm.ParseRhythmMeasures (RhythmCat.Workspace workspace, System.String input, System.Int32& upbeatOffset, MusicPrimitives.Key& key) [0x00088] in <670f698051e040d8977395188bc8edfd>:0 
+  at RhythmCat.Program.Main (System.String[] args) [0x0039e] in <670f698051e040d8977395188bc8edfd>:0 
