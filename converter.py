@@ -17,7 +17,7 @@ midiToDuration = {"16th":"16","eighth":"8d","quarter":"q","half":"h","whole":"w"
 midiToDurationCnt = {"16th":1,"eighth":2,"quarter":4,"half":8,"whole":16}
 compToMidi = {"g/3":55,"a/3":57,"b/3":59,"c/4":60,"d/4":62,"e/4":64,"f/4":65,"g/4":67,"a/4":69,"b/4":71,"c/5":72
               ,"d/5":74,"e/5":76,"f/5":77,"g/5":79,"a/5":81,"b/5":83,"c/6":84}
-
+previousNote = {"b":"a","a":"g","g":"f","e":"d","d":"c"}
 
 def calculateMidiPitch(note, accented):
     if accented == 1:
@@ -103,9 +103,20 @@ def convertMidiToScore(file, numberOfNotes, measureNoteCount):
                                 noteToAdd += "/"
                                 resultAccent.append(1)
                             elif m21noteName in midiB:
-                                noteToAdd += midiToComposition[m21noteName[0]]
-                                noteToAdd += "/"
-                                resultAccent.append(2)
+                                if midiToComposition[m21noteName[0]] == "f":
+                                    noteToAdd += "e"
+                                    noteToAdd += "/"
+                                    resultAccent.append(0)
+                                elif midiToComposition[m21noteName[0]] == "c":
+                                    noteToAdd += "b"
+                                    resultAccent.append(0)
+                                    m21noteOctave-=1
+                                else:
+                                    noteToAdd += previousNote[midiToComposition[m21noteName[0]]]
+                                    resultAccent.append(1)
+                                    noteToAdd += "/"
+                                    
+                                
                             else:
                                 noteToAdd += midiToComposition[m21noteName]
                                 noteToAdd += "/"
@@ -132,9 +143,21 @@ def convertMidiToScore(file, numberOfNotes, measureNoteCount):
                 noteToAdd += "/"
                 resultAccent.append(1)
             elif m21noteName in midiB:
-                noteToAdd += midiToComposition[m21noteName[0]]
-                noteToAdd += "/"
-                resultAccent.append(2)
+                if midiToComposition[m21noteName[0]] == "f":
+                    noteToAdd += "e"
+                    noteToAdd += "/"
+                    resultAccent.append(0)
+                    
+                elif midiToComposition[m21noteName[0]] == "c":
+                    noteToAdd += "b"
+                    noteToAdd += "/"
+                    m21noteOctave-=1
+                    resultAccent.append(0)
+                else:
+                    noteToAdd += previousNote[midiToComposition[m21noteName[0]]]
+                    resultAccent.append(1)
+                    noteToAdd += "/"
+                
             else:
                 noteToAdd += midiToComposition[m21noteName]
                 noteToAdd += "/"
