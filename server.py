@@ -62,22 +62,25 @@ def upload_file():
 
 
 
-@app.route('/start', methods=['GET'])
+@app.route('/start', methods=['POST'])
 @common_counter
 def startApp():
-    conn = get_db_connection()
-    subject_uuid = str(uuid.uuid4())
+    if request.method == 'POST':
+        user = request.json['data']
+        conn = get_db_connection()
+        subject_uuid = str(uuid.uuid4())
+       
 
-    conn.execute("INSERT INTO subject (id) VALUES( '%s')" % subject_uuid)
-    conn.commit()
-    conn.close()
-    os.mkdir(os.getcwd()+"/../userData/" + subject_uuid)
-    os.mkdir(os.getcwd()+"/../userData/" + subject_uuid + "/generatedMelodies")
-    os.mkdir(os.getcwd()+"/../userData/"+ subject_uuid + "/compositions")
+        conn.execute("""INSERT INTO subject (id,user) VALUES(?,?);""", (subject_uuid, user))
+        conn.commit()
+        conn.close()
+        os.mkdir(os.getcwd()+"/../userData/" + subject_uuid)
+        os.mkdir(os.getcwd()+"/../userData/" + subject_uuid + "/generatedMelodies")
+        os.mkdir(os.getcwd()+"/../userData/"+ subject_uuid + "/compositions")
 
-    encoded_jwt = jwt.encode({"id": subject_uuid,"exp": datetime.datetime.now(tz=datetime.timezone.utc) + datetime.timedelta(seconds=30000)}, SECRET_KEY, algorithm="HS256")
-    print(encoded_jwt)
-    return jsonify(encoded_jwt), 200
+        encoded_jwt = jwt.encode({"id": subject_uuid,"exp": datetime.datetime.now(tz=datetime.timezone.utc) + datetime.timedelta(seconds=30000)}, SECRET_KEY, algorithm="HS256")
+        print(encoded_jwt)
+        return jsonify(encoded_jwt), 200
 
 
 @app.route('/sendBlob', methods=['POST'])
@@ -255,8 +258,8 @@ def computeTotalResult(orig,flex,fluency,analogies,groups,score):
     groupsScore = len(groups)/(minGroups-2)
     musicatScore = (analogiesScore+groupsScore)/2
     creativityScore = (orig+flex+fluency)/3
-    totalScore = creativityScore*musicatScore
-    return totalScore, musicatScore
+   
+    return creativityScore, musicatScore
 
 
 

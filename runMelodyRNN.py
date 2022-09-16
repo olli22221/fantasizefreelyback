@@ -10,7 +10,7 @@ def computeNewNotes(input, userPath, temperature):
     numOfGeneratedNotes = 256
 
     #result = subprocess.call(['source activate venv;python3.7','../magenta/magenta/models/melody_rnn/melody_rnn_generate.py','--config=attention_rnn --output_dir=rnnModel/generatedMelodies/','--numoutputs=10','--num_steps=128', '--primer_melody='+str(input),'--temperature=temperature','--bundle_file=rnnModel/attention_rnn.mag'])
-    result = subprocess.check_call(["../magenta/venv/bin/python3.7", "../magenta/magenta/models/melody_rnn/melody_rnn_generate.py",'--config=attention_rnn','--output_dir='+userPath,'--num_outputs=20','--num_steps='+str(numOfGeneratedNotes), '--primer_melody='+str(inputToRNN),'--bundle_file=rnnModel/attention_rnn.mag'])
+    result = subprocess.check_call(["../magenta/venv/bin/python3.7", "../magenta/magenta/models/melody_rnn/melody_rnn_generate.py",'--config=attention_rnn','--output_dir='+userPath,'--num_outputs=15','--num_steps='+str(numOfGeneratedNotes), '--primer_melody='+str(inputToRNN),'--bundle_file=rnnModel/attention_rnn.mag'])
     return result
 
 
