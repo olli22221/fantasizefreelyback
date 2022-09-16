@@ -67,11 +67,17 @@ def upload_file():
 def startApp():
     if request.method == 'POST':
         user = request.json['data']
+        basic = request.json['basic']
         conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM subject WHERE user=?",(user,))
+        row = cur.fetchone()
+        if row is not None:
+            return "There already exists such a username" ,408
         subject_uuid = str(uuid.uuid4())
        
 
-        conn.execute("""INSERT INTO subject (id,user) VALUES(?,?);""", (subject_uuid, user))
+        conn.execute("""INSERT INTO subject (id,user,basic) VALUES(?,?,?);""", (subject_uuid, user, basic))
         conn.commit()
         conn.close()
         os.mkdir(os.getcwd()+"/../userData/" + subject_uuid)
