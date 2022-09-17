@@ -441,7 +441,7 @@ def runCreativityScoring():
 
 
 @app.route('/calculateCreativityBasic', methods=['POST'])
-def runCreativityScoring():
+def runCreativityScoringBasic():
     if request.method == 'POST':
         conn = get_db_connection_basic()
 
