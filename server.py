@@ -440,6 +440,47 @@ def runCreativityScoring():
         return Response(response, status=200)
 
 
+@app.route('/calculateCreativityBasic', methods=['POST'])
+def runCreativityScoring():
+    if request.method == 'POST':
+        conn = get_db_connection_basic()
+
+        jwtToken = request.json['jwtToken']
+        # count = request.form['count']
+        try:
+            decodedToken = jwt.decode(jwtToken, SECRET_KEY, algorithms=["HS256"])
+        except:
+            return "JWT Token expired", 401
+        subjectId = decodedToken['id']
+        pathToCompositions = USER_DIR_BASIC + subjectId + "/compositions/"
+
+        userCompositions = []
+        for file in os.listdir(pathToCompositions):
+            with open(pathToCompositions + file + "/compositionData.json") as tmpFile:
+                jsonData = json.load(tmpFile)
+                jsonData = json.loads(jsonData)
+
+                userCompositions.append(jsonData)
+
+        # composition = request.form['composition']
+
+        # result = run(os.getcwd()+"/RhythmCat.exe", composition)
+        # conn.execute("INSERT INTO compositions (id,fk,filepath) VALUES( ?,?,?)", (composition_uuid, subjectId, midfilepath))
+        # conn.commit()
+        # conn.close()
+        data = request.json['data']
+
+        response = {}
+        orig, flex, fluency = calculateCreativityScores(data, userCompositions)
+        response['originality'] = orig
+        response['flexability'] = flex
+        response['fluency'] = fluency
+
+        response = json.dumps(response)
+        print(response)
+        return Response(response, status=200)
+
+
 
 metrics.register_default(
     common_counter
