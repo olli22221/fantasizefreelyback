@@ -320,7 +320,9 @@ def submitComposition():
         
         
         
-        response['totalScore'] = totalResult
+        response['orig'] = orig
+        response['fluency'] = fluency
+        response['flex'] = flex
         
         with open(pathToImageDir+"out.png",'rb') as musicatImage:
             im_bytes = musicatImage.read()
@@ -416,7 +418,9 @@ def submitCompositionBasic():
             (score_uuid, composition_uuid, fluency, flex, orig, totalResult, musicat))
         conn.commit()
 
-        response['totalScore'] = totalResult
+        response['orig'] = orig
+        response['fluency'] = fluency
+        response['flex'] = flex
 
         with open(pathToImageDir + "out.png", 'rb') as musicatImage:
             im_bytes = musicatImage.read()
@@ -510,7 +514,9 @@ def submitCompositionStatic():
             (score_uuid, composition_uuid, fluency, flex, orig, totalResult, musicat))
         conn.commit()
 
-        response['totalScore'] = totalResult
+        response['orig'] = orig
+        response['fluency'] = fluency
+        response['flex'] = flex
 
         with open(pathToImageDir + "out.png", 'rb') as musicatImage:
             im_bytes = musicatImage.read()
