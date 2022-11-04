@@ -46,6 +46,7 @@ def startApp():
     if request.method == 'POST':
         user = request.json['data']
         basic = request.json['basic']
+        preExperimentalData = request.json['preExperimental']
         conn = get_db_connection()
         cur = conn.cursor()
         cur.execute("SELECT * FROM subject WHERE user=?",(user,))
@@ -61,9 +62,17 @@ def startApp():
         os.mkdir(os.getcwd()+"/../userData/" + subject_uuid)
         os.mkdir(os.getcwd()+"/../userData/" + subject_uuid + "/generatedMelodies")
         os.mkdir(os.getcwd()+"/../userData/"+ subject_uuid + "/compositions")
+        os.mkdir(os.getcwd()+"/../userData/"+ subject_uuid + "/experiments")
 
         encoded_jwt = jwt.encode({"id": subject_uuid,"exp": datetime.datetime.now(tz=datetime.timezone.utc) + datetime.timedelta(seconds=30000)}, SECRET_KEY, algorithm="HS256")
-        print(encoded_jwt)
+        
+        jsonComposition = json.dumps(data)
+        PathToPreExperiment = USER_DIR + subjectId + "/experiments/" +"preExperiments.json"
+
+
+       
+        with open(PathToPreExperiment,'w') as f:
+            json.dump(preExperimentalData,f)
         return jsonify(encoded_jwt), 200
 
 
