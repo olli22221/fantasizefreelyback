@@ -8,12 +8,11 @@ from flask import Flask, request,Response, jsonify, send_file
 from flask_cors import CORS
 from dotenv import load_dotenv
 from runCreativityScoring import calculateCreativityScores
-from prometheus_flask_exporter import PrometheusMetrics
 import wave
 load_dotenv()
 app = Flask(__name__)
 cors = CORS(app)
-metrics = PrometheusMetrics(app)
+
 
 
 SECRET_KEY = os.getenv("MY_SECRET")
@@ -21,16 +20,6 @@ USER_DIR = os.getenv("USER_DIR")
 USER_DIR_BASIC = os.getenv("USER_DIR_BASIC")
 USER_DIR_STATIC = os.getenv("USER_DIR_STATIC")
 
-metrics.info('app_info', 'Application info', version='1.0.3')
-
-
-
-
-
-common_counter = metrics.counter(
-    'by_path_counter', 'Request count by request paths',
-    labels={'path': lambda: request.path}
-)
 
 
 
@@ -53,7 +42,6 @@ def get_db_connection_static():
 
 
 @app.route('/start', methods=['POST'])
-@common_counter
 def startApp():
     if request.method == 'POST':
         user = request.json['data']
@@ -80,7 +68,6 @@ def startApp():
 
 
 @app.route('/startBasic', methods=['POST'])
-@common_counter
 def startAppBasic():
     if request.method == 'POST':
         user = request.json['data']
@@ -107,7 +94,6 @@ def startAppBasic():
         return jsonify(encoded_jwt), 200
 
 @app.route('/startStatic', methods=['POST'])
-@common_counter
 def startAppStatic():
     if request.method == 'POST':
         user = request.json['data']
@@ -151,7 +137,6 @@ def sendBlob():
 
 
 @app.route('/runRNN', methods=['POST'])
-@common_counter
 def runRNN():
     if request.method == 'POST':
         data = request.json['data']
@@ -168,7 +153,6 @@ def runRNN():
         response = runRnn(data, UserPath,meter,temperature)
         return Response(response, status=200)
 @app.route('/runRNNBasic', methods=['POST'])
-@common_counter
 def runRNNBasic():
     if request.method == 'POST':
         data = request.json['data']
@@ -186,7 +170,6 @@ def runRNNBasic():
         return Response(response, status=200)
 
 @app.route('/runRNNStatic', methods=['POST'])
-@common_counter
 def runRNNStatic():
     if request.method == 'POST':
         data = request.json['data']
@@ -205,7 +188,6 @@ def runRNNStatic():
 
 
 @app.route('/runMusicat', methods=['POST'])
-@common_counter
 def runMusicat():
     if request.method == 'POST':
 
@@ -235,7 +217,6 @@ def runMusicat():
 
 
 @app.route('/submitComposition', methods=['POST'])
-@common_counter
 def submitComposition():
     if request.method == 'POST':
         '''#conn = get_db_connection()
@@ -339,7 +320,6 @@ def submitComposition():
 
 
 @app.route('/submitCompositionBasic', methods=['POST'])
-@common_counter
 def submitCompositionBasic():
     if request.method == 'POST':
         '''#conn = get_db_connection()
@@ -435,7 +415,6 @@ def submitCompositionBasic():
         return Response(response, status=200)
 
 @app.route('/submitCompositionStatic', methods=['POST'])
-@common_counter
 def submitCompositionStatic():
     if request.method == 'POST':
         '''#conn = get_db_connection()
@@ -632,6 +611,4 @@ def runCreativityScoringBasic():
 
 
 
-metrics.register_default(
-    common_counter
-)
+
