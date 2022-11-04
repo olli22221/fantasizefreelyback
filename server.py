@@ -67,7 +67,7 @@ def startApp():
         encoded_jwt = jwt.encode({"id": subject_uuid,"exp": datetime.datetime.now(tz=datetime.timezone.utc) + datetime.timedelta(seconds=30000)}, SECRET_KEY, algorithm="HS256")
         
         preExperimentalData = json.dumps(preExperimentalData)
-        PathToPreExperiment = USER_DIR + subjectId + "/experiments/" +"preExperiments.json"
+        PathToPreExperiment = USER_DIR + subject_uuid + "/experiments/" +"preExperiments.json"
 
 
        
