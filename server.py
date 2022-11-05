@@ -174,7 +174,7 @@ def submitSurvey():
         subjectId = decodedToken['id']
         postExperimentalData = request.json['postExperimental']
         PathToPostExperiment = USER_DIR + subjectId + "/experiments/" + "postExperiments.json"
-        with open(PathToPreExperiment,'w') as f:
+        with open(PathToPostExperiment,'w') as f:
             json.dump(postExperimentalData,f)
         
         return 200
@@ -193,7 +193,7 @@ def submitSurveyBasic():
         subjectId = decodedToken['id']
         postExperimentalData = request.json['postExperimental']
         PathToPostExperiment = USER_DIR_BASIC + subjectId + "/experiments/" + "postExperiments.json"
-        with open(PathToPreExperiment,'w') as f:
+        with open(PathToPostExperiment,'w') as f:
             json.dump(postExperimentalData,f)
         
         return 200
@@ -211,7 +211,7 @@ def submitSurveyStatic():
         subjectId = decodedToken['id']
         postExperimentalData = request.json['postExperimental']
         PathToPostExperiment = USER_DIR_STATIC + subjectId + "/experiments/" + "postExperiments.json"
-        with open(PathToPreExperiment,'w') as f:
+        with open(PathToPostExperiment,'w') as f:
             json.dump(postExperimentalData,f)
         
         return 200
