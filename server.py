@@ -177,7 +177,7 @@ def submitSurvey():
         with open(PathToPostExperiment,'w') as f:
             json.dump(postExperimentalData,f)
         
-        return 200
+        return "200"
 
 
 @app.route('/submitSurveyBasic', methods=['POST'])
@@ -196,7 +196,7 @@ def submitSurveyBasic():
         with open(PathToPostExperiment,'w') as f:
             json.dump(postExperimentalData,f)
         
-        return 200
+        return "200"
 
 @app.route('/submitSurveyStatic', methods=['POST'])
 def submitSurveyStatic():
@@ -214,7 +214,7 @@ def submitSurveyStatic():
         with open(PathToPostExperiment,'w') as f:
             json.dump(postExperimentalData,f)
         
-        return 200
+        return "200"
 
 
 @app.route('/runRNN', methods=['POST'])
