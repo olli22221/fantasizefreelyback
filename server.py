@@ -81,6 +81,7 @@ def startAppBasic():
     if request.method == 'POST':
         user = request.json['data']
         basic = request.json['basic']
+        preExperimentalData = request.json['preExperimental']
         conn = get_db_connection_basic()
         cur = conn.cursor()
         cur.execute("SELECT * FROM subject WHERE user=?", (user,))
@@ -95,7 +96,15 @@ def startAppBasic():
         os.mkdir(os.getcwd() + "/../userDataBasic/" + subject_uuid)
         os.mkdir(os.getcwd() + "/../userDataBasic/" + subject_uuid + "/generatedMelodies")
         os.mkdir(os.getcwd() + "/../userDataBasic/" + subject_uuid + "/compositions")
+        os.mkdir(os.getcwd()+"/../userDataBasic/"+ subject_uuid + "/experiments")
 
+        preExperimentalData = json.dumps(preExperimentalData)
+        PathToPreExperiment = USER_DIR_BASIC + subject_uuid + "/experiments/" +"preExperiments.json"
+
+
+       
+        with open(PathToPreExperiment,'w') as f:
+            json.dump(preExperimentalData,f)
         encoded_jwt = jwt.encode({"id": subject_uuid,
                                   "exp": datetime.datetime.now(tz=datetime.timezone.utc) + datetime.timedelta(
                                       seconds=30000)}, SECRET_KEY, algorithm="HS256")
@@ -107,6 +116,7 @@ def startAppStatic():
     if request.method == 'POST':
         user = request.json['data']
         basic = request.json['basic']
+        preExperimentalData = request.json['preExperimental']
         conn = get_db_connection_static()
         cur = conn.cursor()
         cur.execute("SELECT * FROM subject WHERE user=?", (user,))
@@ -121,6 +131,13 @@ def startAppStatic():
         os.mkdir(os.getcwd() + "/../userDataStatic/" + subject_uuid)
         os.mkdir(os.getcwd() + "/../userDataStatic/" + subject_uuid + "/generatedMelodies")
         os.mkdir(os.getcwd() + "/../userDataStatic/" + subject_uuid + "/compositions")
+        os.mkdir(os.getcwd()+"/../userDataStatic/"+ subject_uuid + "/experiments")
+
+        preExperimentalData = json.dumps(preExperimentalData)
+        PathToPreExperiment = USER_DIR_STATIC + subject_uuid + "/experiments/" +"preExperiments.json"
+
+        with open(PathToPreExperiment,'w') as f:
+            json.dump(preExperimentalData,f)
 
         encoded_jwt = jwt.encode({"id": subject_uuid,
                                   "exp": datetime.datetime.now(tz=datetime.timezone.utc) + datetime.timedelta(
@@ -143,6 +160,61 @@ def sendBlob():
 
     return Response(request.form['wavFile'] ,status=200)
 
+
+@app.route('/submitSurvey', methods=['POST'])
+def submitSurvey():
+    if request.method == 'POST':
+        
+        jwtToken = request.json['jwtToken']
+        
+        try:
+            decodedToken = jwt.decode(jwtToken, SECRET_KEY, algorithms=["HS256"])
+        except:
+            return "JWT Token expired", 401
+        subjectId = decodedToken['id']
+        postExperimentalData = request.json['postExperimental']
+        PathToPostExperiment = USER_DIR + subjectId + "/experiments/" + "postExperiments.json"
+        with open(PathToPreExperiment,'w') as f:
+            json.dump(postExperimentalData,f)
+        
+        return 200
+
+
+@app.route('/submitSurveyBasic', methods=['POST'])
+def submitSurveyBasic():
+    if request.method == 'POST':
+        
+        jwtToken = request.json['jwtToken']
+        
+        try:
+            decodedToken = jwt.decode(jwtToken, SECRET_KEY, algorithms=["HS256"])
+        except:
+            return "JWT Token expired", 401
+        subjectId = decodedToken['id']
+        postExperimentalData = request.json['postExperimental']
+        PathToPostExperiment = USER_DIR_BASIC + subjectId + "/experiments/" + "postExperiments.json"
+        with open(PathToPreExperiment,'w') as f:
+            json.dump(postExperimentalData,f)
+        
+        return 200
+
+@app.route('/submitSurveyStatic', methods=['POST'])
+def submitSurveyStatic():
+    if request.method == 'POST':
+        
+        jwtToken = request.json['jwtToken']
+        
+        try:
+            decodedToken = jwt.decode(jwtToken, SECRET_KEY, algorithms=["HS256"])
+        except:
+            return "JWT Token expired", 401
+        subjectId = decodedToken['id']
+        postExperimentalData = request.json['postExperimental']
+        PathToPostExperiment = USER_DIR_STATIC + subjectId + "/experiments/" + "postExperiments.json"
+        with open(PathToPreExperiment,'w') as f:
+            json.dump(postExperimentalData,f)
+        
+        return 200
 
 
 @app.route('/runRNN', methods=['POST'])
